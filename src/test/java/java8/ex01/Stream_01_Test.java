@@ -136,14 +136,14 @@ public class Stream_01_Test {
 
     @Test
     public void test_stream_min() throws Exception {
-        List<Order> orders = new Data().getOrders();
+        
 
         List<Pizza> pizzas = new Data().getPizzas();
 
         // TODO Trouver la pizza la moins chère dont le prix est >= 950
         Optional<Pizza> result = pizzas.stream()
         		.filter(p->p.getPrice()>= 950)
-        		.min((p1,p2)-> p1.getPrice().compareTo(p2.getPrice()));
+        		.min(Comparator.comparing(Pizza::getPrice));
 
         assertThat(result.isPresent(), is(true));
         assertThat(result.get(), hasProperty("id", is(3)));
